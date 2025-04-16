@@ -2,9 +2,11 @@ import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class OrganizationApp {
+    private static Group company = null;
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         String choice;
+
 
         while(true){
             //display menu
@@ -20,7 +22,6 @@ public class OrganizationApp {
             //ask for user input
             System.out.print("Your choice: ");
             choice = userInput.nextLine();
-            System.out.println();
 
             // handle input
             //both q and Q are accepted
@@ -34,6 +35,11 @@ public class OrganizationApp {
                     createPrint();
                     break;
                 case "2":
+                    createPrint();
+                    System.out.println();
+                    addPersonPrint();
+
+                    break;
                 case "3":
                     System.out.println("Choice " + choice + " not implemented.\n");
                     break;
@@ -41,21 +47,39 @@ public class OrganizationApp {
                     System.out.println("Invalid choice\n");
 
             }
+            System.out.println();
         }
 
         userInput.close();
     }
 
     private static void createPrint(){
-        Group topManagement = new Group("Top Management", "Scrooge McDuck");
+        company = new Group("Top Management", "Scrooge McDuck");
         Worker GrandmaDuck = new Worker("Grandma Duck", "Secretary");
-        topManagement.add(GrandmaDuck);
+        company.add(GrandmaDuck);
 
         Group marketing = new Group("Marketing", "Donald Duck");
         marketing.add(new Worker("Gus Goose",""));
-        topManagement.add(marketing);
+        company.add(marketing);
 
-        //testingprint
-        topManagement.print(0);
+        //testing print
+        company.print(0);
+    }
+
+    private static void addPersonPrint(){
+
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("Give unit name: ");
+        String unitName = userInput.nextLine();
+
+        System.out.print("Give person name: ");
+        String personName = userInput.nextLine();
+
+        //add a new person
+        Worker newGuy = new Worker(personName,"");
+        OrganizationComponent group = company.findGroupByName(unitName);
+        ((Group) group).add(newGuy);
+        company.print(0);
+
     }
 }

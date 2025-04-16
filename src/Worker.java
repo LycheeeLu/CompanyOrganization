@@ -21,7 +21,6 @@ public class Worker implements OrganizationComponent {
            System.out.println(indent + "Worker: "+ getName() + " ");
        }
 
-       System.out.println();
     }
 
     @Override
