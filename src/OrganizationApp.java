@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class OrganizationApp {
@@ -32,6 +31,8 @@ public class OrganizationApp {
             //check scenario 1, 2, and 3
             switch (choice){
                 case "1":
+                    createPrint();
+                    break;
                 case "2":
                 case "3":
                     System.out.println("Choice " + choice + " not implemented.\n");
@@ -43,5 +44,18 @@ public class OrganizationApp {
         }
 
         userInput.close();
+    }
+
+    private static void createPrint(){
+        Group topManagement = new Group("Top Management", "Scrooge McDuck");
+        Worker GrandmaDuck = new Worker("Grandma Duck", "Secretary");
+        topManagement.add(GrandmaDuck);
+
+        Group marketing = new Group("Marketing", "Donald Duck");
+        marketing.add(new Worker("Gus Goose",""));
+        topManagement.add(marketing);
+
+        //testingprint
+        topManagement.print(0);
     }
 }
