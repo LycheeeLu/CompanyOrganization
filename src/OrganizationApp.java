@@ -37,7 +37,7 @@ public class OrganizationApp {
                     removePerson();
                     break;
                 default:
-                    System.out.println("\nInvalid input. Please enter 1, 2, 3, q or Q.");
+                    System.out.println("\nERROR: Invalid input. Please enter 1, 2, 3, q or Q.");
 
             }
             System.out.println();
@@ -109,7 +109,7 @@ public class OrganizationApp {
 
         // Validate person name format (First Last with capital letters)
             if (!personName.matches("[A-Z][a-z]+ [A-Z][a-z]+")) {
-                throw new ErrorHandling.InvalidNameFormatException("Invalid name format. Please enter a valid name like John Smith");
+                throw new ErrorHandling.InvalidNameFormatException("Invalid name. Please enter a valid name like John Smith.");
             }
 
             //add a new person
@@ -117,7 +117,7 @@ public class OrganizationApp {
         Component group = company.findGroupByName(unitName);
 
         if (group == null) {
-            throw new ErrorHandling.GroupNotFoundException("Organization not found. Give it again");
+            throw new ErrorHandling.GroupNotFoundException("Organization not found. Give it again.");
         }
         ((Group) group).add(newGuy);
         print();
@@ -140,13 +140,13 @@ public class OrganizationApp {
 
             // Validate person name format (First Last with capital letters)
             if (!personName.matches("[A-Z][a-z]+ [A-Z][a-z]+")) {
-                throw new ErrorHandling.InvalidNameFormatException("Invalid name format. Please enter a valid name like John Smith");
+                throw new ErrorHandling.InvalidNameFormatException("Invalid name. Please enter a valid name like John Smith.");
             }
 
             boolean removed = removePersonRecursively(company, personName);
 
             if(!removed){
-                throw new ErrorHandling.PersonNotFoundException("Person not found. Give it again");
+                throw new ErrorHandling.PersonNotFoundException("Person not found. Give it again.");
             }
 
             print();
