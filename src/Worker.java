@@ -1,9 +1,13 @@
-public class Worker implements OrganizationComponent {
-    private String name;
+public class Worker extends Component {
     private String role;
 
+    public Worker(String name) {
+        super(name);
+        this.role = null;
+    }
+
     public Worker(String name, String role) {
-        this.name = name;
+        super(name);
         this.role = role;
     }
 
@@ -23,10 +27,6 @@ public class Worker implements OrganizationComponent {
 
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
 
     public String getRole() {
         return role;

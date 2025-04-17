@@ -1,33 +1,67 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group implements OrganizationComponent {
-    private String groupName;
+public class Group extends Component {
     private String bossName;
-    private List<OrganizationComponent> groupMembers;
+    private List<Component> groupMembers;
 
-    public Group(String groupName, String bossName) {
-        this.groupName = groupName;
+    public Group(String name, String bossName) {
+        super(name);
         this.bossName = bossName;
         this.groupMembers = new ArrayList<>();
     }
 
-    @Override
-    public String getName() {
+
+    public String getBossName() {
         return bossName;
     }
 
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public List<OrganizationComponent> getGroupMembers() {
+    public List<Component> getGroupMembers() {
         return new ArrayList<>(groupMembers);
     }
+
     //adding members to group
-    public void add(OrganizationComponent member) {
+    public void add(Component member) {
         groupMembers.add(member);
     }
+
+    //removing members from group
+    public boolean remove(Component member) {
+        return groupMembers.remove(member);
+    }
+
+    //remove members by name from group
+    public boolean removeByName(String name) {
+        for (Component component : new ArrayList<>(groupMembers)) {
+            if (component instanceof Worker && component.getName().equals(name)) {
+                return groupMembers.remove(component);
+            }
+        }
+        return false;
+    }
+
+    //find group members by name
+    public Component findGroupByName(String userinput) {
+        // if input name == the biggest group name
+        if (userinput.equals(getName())) {
+            return this;
+        }
+        for (Component component : groupMembers) {
+            //only check for groups not workers
+            if (component instanceof Group) {
+                //now that component is a group, we type cast it into a Group
+                // because it originally comes from OrganizationComponent datatype
+                Group g = (Group) component;
+                //using the function on itself
+                Component found = g.findGroupByName(userinput);
+                if(found != null) {
+                    return found;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public void print(int indentationLevel) {
         // add indent
@@ -37,36 +71,16 @@ public class Group implements OrganizationComponent {
         }
         // print group name and boss name
         System.out.println();
-        System.out.println(indent + "Group: " + getGroupName() + ", boss's name: " + getName() );
-        // print all members (workers or groups) with increated indent level
-        for (OrganizationComponent component : groupMembers) {
+        System.out.println(indent + "Group: " + getName() + ", boss's name: " + getBossName() );
+        // print all members (workers or groups) with increased indent level
+        for (Component component : groupMembers) {
             component.print(indentationLevel + 1);
         }
 
     }
 
 
-    //map user input group name to the actual group
-    public OrganizationComponent findGroupByName(String userinput) {
-        // if input name == the biggest group name
-        if (userinput.equals(groupName)){
-            return this;
-        }
-        for (OrganizationComponent component : groupMembers) {
-            //only check for groups not workers
-            if (component instanceof Group) {
-                //now that component is a group, we type cast it into a Group
-                // because it originally comes from OrganizationComponent datatype
-                Group g = (Group) component;
-                //using the function on itself
-                OrganizationComponent found = g.findGroupByName(userinput);
-                if(found != null) {
-                    return found;
-                }
-            }
-        }
-        return null;
-    }
+
 
 
 
