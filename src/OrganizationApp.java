@@ -37,7 +37,7 @@ public class OrganizationApp {
                     removePerson();
                     break;
                 default:
-                    System.out.println("Invalid input. Please enter 1, 2, 3, q or Q.\n");
+                    System.out.println("\nInvalid input. Please enter 1, 2, 3, q or Q.");
 
             }
             System.out.println();
