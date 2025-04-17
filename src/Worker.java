@@ -27,7 +27,6 @@ public class Worker extends Component {
 
     }
 
-
     public String getRole() {
         return role;
     }
