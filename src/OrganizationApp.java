@@ -59,7 +59,7 @@ public class OrganizationApp {
 
     private static void create(){
         company = new Group("Top Management", "Scrooge McDuck");
-        company.add(new Worker("Grandma Duck", "Secretary"));
+        company.add(new Worker("Grandma Duck", "secretary"));
 
         // Create departments
         Group marketing = new Group("Marketing", "Donald Duck");
